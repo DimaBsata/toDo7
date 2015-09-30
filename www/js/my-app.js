@@ -3,7 +3,8 @@ var myApp = new Framework7({
   material: true,
   template7Pages: true,
   init:false,
-  swipePanel: 'right'
+  swipePanel: 'right',
+  animateNavBackIcon: true
 });
  
 var $$ = Dom7;
@@ -16,11 +17,10 @@ myApp.onPageInit('main', function (page) {
   mainView.router.loadPage('login-screen.html');
 });
 
-
 /************* LogIn Page Init ***************/
 myApp.onPageInit('login-screen', function (page) {
   var pageContainer = $$(page.container);
-  pageContainer.find('.list-button').on('click', function () {
+  pageContainer.find('.button').on('click', function () {
     var username = pageContainer.find('input[name="username"]').val();
     var password = pageContainer.find('input[name="password"]').val();
     if (username=="user" && password=="user")
@@ -33,6 +33,14 @@ myApp.onPageInit('login-screen', function (page) {
   });
 });   
 
+/************* SignUp Page Init ***************/
+myApp.onPageInit('signUp', function (page) {
+     var pageContainer = $$(page.container);
+  pageContainer.find('.button').on('click', function () {
+      var formData = myApp.formToJSON('#my-form');
+      myApp.alert(JSON.stringify(formData));
+  });
+});
 
 /************* Food Menu List ***************/
 function showFoodMenuList()
