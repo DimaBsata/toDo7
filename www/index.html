@@ -1,35 +1,115 @@
 <!DOCTYPE html>
-<!--
-    Copyright (c) 2012-2014 Adobe Systems Incorporated. All rights reserved.
-
-    Licensed to the Apache Software Foundation (ASF) under one
-    or more contributor license agreements.  See the NOTICE file
-    distributed with this work for additional information
-    regarding copyright ownership.  The ASF licenses this file
-    to you under the Apache License, Version 2.0 (the
-    "License"); you may not use this file except in compliance
-    with the License.  You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing,
-    software distributed under the License is distributed on an
-    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-     KIND, either express or implied.  See the License for the
-    specific language governing permissions and limitations
-    under the License.
--->
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <meta name="format-detection" content="telephone=no" />
-        <meta name="msapplication-tap-highlight" content="no" />
-        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
-        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
-        <link rel="stylesheet" type="text/css" href="css/index.css" />
-        <title>Hello World</title>
-    </head>
-    <body>
-      test
-    </body>
+  <head>
+    <!-- Required meta tags-->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <!-- Your app title -->
+    <title>My App</title>
+    <!-- Path to Framework7 Library CSS, iOS Theme -->
+    <link rel="stylesheet" href="css/framework7.ios.min.css">
+    <!-- Path to Framework7 color related styles, iOS Theme -->
+    <link rel="stylesheet" href="css/framework7.ios.colors.min.css">
+    <!-- Path to your custom app styles-->
+    <link rel="stylesheet" href="css/my-app.css">
+  </head>
+  <body>
+    <!-- Status bar overlay for full screen mode (PhoneGap) -->
+    <div class="statusbar-overlay"></div>
+    <!-- Views -->
+    <div class="views">
+      <!-- Your main view, should have "view-main" class -->
+      <div class="view view-main">
+        <!-- Top Navbar-->
+        <div class="navbar bg-pink color-white">
+          <div class="navbar-inner">
+            <!-- We need cool sliding animation on title element, so we have additional "sliding" class -->
+            <div class="center sliding"><strong> To Do 7 </strong></div>
+            <div class="right"><a href="#" class="link open-popup"><i class="icon icon-plus">+</i></a></div>
+          </div>
+        </div>
+        <!-- Pages container, because we use fixed-through navbar and toolbar, it has additional appropriate classes-->
+        <div class="pages navbar-through toolbar-through">
+          <!-- Page, "data-page" contains page name -->
+          <div data-page="index" class="page theme-pink bg-gray border-pink">
+            <!-- Scrollable page content -->
+            <div class="page-content" id="notesList">
+                    <div class="content-block-title">Tasks</div>
+        <div class="list-block media-list">
+            <ul>
+                {{#each notes}}
+                    <li class="swipeout">
+                        <a href="#" class="item-link swipeout-content item-content">
+                            <div class="item-inner">
+                                <div class="item-title-row">
+                                    <div class="item-title">{{title}}</div>
+                                </div>
+                                <div class="item-text">{{description}}</div>
+                            </div>
+                        </a>
+                        <div class="swipeout-actions-right">
+                          <a href="#" class="swipeout-delete">Delete</a>
+                        </div>
+                    </li>
+                {{/each}}
+            </ul>
+        </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ************************** Pop Up ************************************-->
+    <div class="popup">
+      <div class="navbar bg-pink color-white">
+        <div class="navbar-inner">
+          <!-- We need cool sliding animation on title element, so we have additional "sliding" class -->
+          <div class="center"><strong> Add New Task </strong></div>
+          <div class="right"><a href="#" class="link color-white close-popup">Cancel</a></div>
+        </div>
+      </div>
+      <div class="content-block theme-pink">
+        <form class="list-block" id="my-form">
+          <ul>
+            <li>
+              <div class="item-content">
+                <div class="item-inner">
+                  <div class="item-title label">Task Title</div>
+                  <div class="item-input">
+                    <input type="text" name="title" placeholder="Your Task Title">
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="item-content">
+                <div class="item-inner">
+                  <div class="item-title label">Task Description</div>
+                  <div class="item-input">
+                    <input type="text" name="description" placeholder="Your Text">
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+          <p>
+            <a href="#" class="button addTask">Add Task</a>
+          </p>
+        </form>
+      </div>
+    </div>
+
+    <!--**********Notes List Template**************-->
+    <script type="text/template7" id="NotesListTemplate">
+
+    </script>
+
+    <!-- Path to Framework7 Library JS-->
+    <script type="text/javascript" src="js/framework7.min.js"></script>
+    <!-- Path to your app js-->
+    <script type="text/javascript" src="js/my-app.js"></script>
+  </body>
 </html>

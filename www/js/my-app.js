@@ -1,67 +1,40 @@
+// Initialize your app
 var myApp = new Framework7({
-  modalTitle: 'Food Shop System',
-  material: true,
-  template7Pages: true,
-  init:false,
-  swipePanel: 'right',
-  animateNavBackIcon: true
+  modalTitle: 'ToDo7',
+  template7Pages:true,
+  template7Data: {
+  'page:index': {
+            'notes': [{title:'tit',description:'desc'}]
+        }
+      }
 });
- 
+
+
+// Export selectors engine
 var $$ = Dom7;
-
-// Add and init View
-var mainView = myApp.addView('.view-main');
-
-/************* Main Page Init ***************/
-myApp.onPageInit('main', function (page) {
-  mainView.router.loadPage('login-screen.html');
+// Add views
+var mainView = myApp.addView('.view-main', {
+  // Because we use fixed-through navbar we can enable dynamic navbar
+  dynamicNavbar: true
 });
 
-/************* LogIn Page Init ***************/
-myApp.onPageInit('login-screen', function (page) {
-  var pageContainer = $$(page.container);
-  pageContainer.find('.button').on('click', function () {
-    var username = pageContainer.find('input[name="username"]').val();
-    var password = pageContainer.find('input[name="password"]').val();
-    if (username=="user" && password=="user")
-    {
-      showFoodMenuList();
-      showPanelMenuList();
-    }
-    else
-      myApp.alert("Wrong username or password");
-  });
-});   
-
-/************* SignUp Page Init ***************/
-myApp.onPageInit('signUp', function (page) {
-     var pageContainer = $$(page.container);
-  pageContainer.find('.button').on('click', function () {
-      var formData = myApp.formToJSON('#my-form');
-      myApp.alert(JSON.stringify(formData));
+$$('.popup').on('opened', function () {
+  $$('.addTask').on('click',function(){
+  	notes.push(myApp.formToJSON('#my-form'));
+    myApp.closeModal('.popup');showNotes();
+    alert(JSON.stringify(notes));
   });
 });
 
-/************* Food Menu List ***************/
-function showFoodMenuList()
-{
-  var foods = JSON.parse(
-'[{"foodName":"Humburger","Catalog":"Sandwich","Contents":"Potatoes, Meet, Tomato","Price":"15","image":"img/1.jpg"},'+
-'{"foodName":"Ice Cream", "Catalog":"Sweets","Contents":"Milk, Chocalete","Price":"5","image":"img/2.jpg"},'+
-'{"foodName":"Cola","Catalog":"Drinks","Contents":"Sugar, Water, Salt","Price":"2","image":"img/3.jpg"}]');
-  mainView.router.load({
-                url:'foodMenu.html',
-                context: {'foods':foods}
-            });
-}  
+myApp.onPageInit('index', function (page) {
+  showNotes();
+});
 
-/************* Panel Menu List ***************/
-function showPanelMenuList()
+function showNotes()
 {
-  var data ='[{"name":"food1","id":"1"},{"name":"food2","id":"2"},{"name":"food3","id":"3"}]';
-  var menuListTemplate = $$('script#menuListTemplate').html();
-  var compiledmenuListTemplate = Template7.compile(menuListTemplate);
-  $$('#menu-list').html(compiledmenuListTemplate({menuList: JSON.parse(data)}));    
+	var NotesListTemplate = $$('script#NotesListTemplate').html();
+  var compiledNotesListTemplate = Template7.compile(NotesListTemplate);
+  $$('#notesList').html(compiledNotesListTemplate({notes:JSON.parse(notes)}));    
 }
 
 /************* Initial App ***************/
