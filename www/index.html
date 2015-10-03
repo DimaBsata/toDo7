@@ -20,7 +20,8 @@
     <div class="statusbar-overlay"></div>
     <!-- Views -->
     <div class="views">
-      <!-- Your main view, should have "view-main" class -->
+
+      <!-- ************************* Main View *************************** -->
       <div class="view view-main">
         <!-- Top Navbar-->
         <div class="navbar bg-pink color-white">
@@ -34,28 +35,8 @@
         <div class="pages navbar-through toolbar-through">
           <!-- Page, "data-page" contains page name -->
           <div data-page="index" class="page theme-pink bg-gray border-pink">
-            <!-- Scrollable page content -->
+            <!-- ********************************* Index Page Content ************************ -->
             <div class="page-content" id="notesList">
-                    <div class="content-block-title">Tasks</div>
-        <div class="list-block media-list">
-            <ul>
-                {{#each notes}}
-                    <li class="swipeout">
-                        <a href="#" class="item-link swipeout-content item-content">
-                            <div class="item-inner">
-                                <div class="item-title-row">
-                                    <div class="item-title">{{title}}</div>
-                                </div>
-                                <div class="item-text">{{description}}</div>
-                            </div>
-                        </a>
-                        <div class="swipeout-actions-right">
-                          <a href="#" class="swipeout-delete">Delete</a>
-                        </div>
-                    </li>
-                {{/each}}
-            </ul>
-        </div>
             </div>
           </div>
         </div>
@@ -96,6 +77,7 @@
             </li>
           </ul>
           <p>
+            <!--*********** Add Task Button ************-->
             <a href="#" class="button addTask">Add Task</a>
           </p>
         </form>
@@ -104,7 +86,30 @@
 
     <!--**********Notes List Template**************-->
     <script type="text/template7" id="NotesListTemplate">
-
+      {{#if this.length}}
+         <div class="content-block-title">Tasks</div>
+            <div class="list-block media-list">
+              <ul>
+                {{#each this}}
+                  <li class="swipeout" data-index="{{@index}}">
+                    <a href="#" class="item-link swipeout-content item-content">
+                      <div class="item-inner">
+                        <div class="item-title-row">
+                          <div class="item-title">{{title}}</div>
+                        </div>
+                        <div class="item-text">{{description}}</div>
+                      </div>
+                    </a>
+                    <div class="swipeout-actions-right">
+                      <a href="#" class="swipeout-delete">Delete</a>
+                    </div>
+                  </li>
+                {{/each}}
+              </ul>
+            </div>  
+      {{else}}
+          <div class="content-block-title">No Tasks to Show</div>
+      {{/if}}
     </script>
 
     <!-- Path to Framework7 Library JS-->
