@@ -24,9 +24,7 @@ myApp.onPageInit('index', function (page) {
 $$('.addTask').on('click',function(){
   notes.push(myApp.formToJSON('#my-form'));
   showNotes();
-   $$('input[name="title"]').val("");
-   $$('input[name="description"]').val("");
-   myApp.closeModal('.popup');
+  myApp.closeModal('.popup');
 });
 
 /***************** Delete Note ********************/
